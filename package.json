@@ -1,0 +1,45 @@
+{
+  "name": "discovery",
+  "version": "1.0.0",
+  "description": "new discovery with react",
+  "main": "index.js",
+  "author": "rpf5573",
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "date-utils": "^1.2.21",
+    "express": "^4.16.4",
+    "express-mysql-session": "^2.0.1",
+    "express-session": "^1.15.6",
+    "fs-extra": "^7.0.1",
+    "moment": "^2.23.0",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "mysql": "^2.16.0",
+    "pm2": "^3.2.4",
+    "socket.io": "^2.2.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "scripts": {
+    "start-dev": "NODE_ENV=development NODE_PORT=8080 nodemon src/index.js",
+    "build-admin": "cd ./src/admin/admin-client && yarn install && yarn build-pro",
+    "build-assist": "cd ./src/assist/assist-client && yarn install && yarn build-pro",
+    "build-entrance": "cd ./src/entrance/entrance-client && yarn install && yarn build-pro",
+    "build-user": "cd ./src/user/user-client && yarn install && yarn build-pro",
+    "build-warehouse": "cd ./src/warehouse/warehouse-client && yarn install && yarn build-pro",
+    "build-media-files": "cd ./src/media-files/media-files-client && yarn install && yarn build-pro",
+    "build-all": "yarn install && yarn build-admin && yarn build-assist && yarn build-entrance && yarn build-user && yarn build-warehouse && yarn build-media-files",
+    "start-v1": "NODE_ENV=production NODE_PORT=8081 DCV=v1 pm2 start src/index.js --name v1",
+    "start-v2": "NODE_ENV=production NODE_PORT=8082 DCV=v2 pm2 start src/index.js --name v2",
+    "start-v3": "NODE_ENV=production NODE_PORT=8083 DCV=v3 pm2 start src/index.js --name v3",
+    "start-v4": "NODE_ENV=production NODE_PORT=8084 DCV=v4 pm2 start src/index.js --name v4",
+    "start-all": "yarn start-v1 && yarn start-v2 && yarn start-v3 && yarn start-v4",
+    "restart": "pm2 delete all && yarn start-all"
+  }
+}
