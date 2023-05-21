@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
+const { Server } = require("socket.io");
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -36,7 +38,7 @@ app.use(session({
 // websocket for puzzle update
 var server = require('http').Server(app);
 // http server를 socket.io server로 upgrade한다
-var io = require('socket.io')(server);
+const io = new Server(server, {});
 
 // entrance
 require('./entrance/init')(app, DCQuery);
@@ -60,17 +62,17 @@ app.use(express.static('public'));
 
 console.log( 'process.env.NODE_PORT : ', process.env.NODE_PORT );
 
-let PORT = process.env.NODE_PORT || 8081;
-server.listen(PORT, 'localhost');
-
 // for real time puzzle update
 io.on('connection', function(socket) {
   socket.on('open_puzzle_box', function(data) {
     console.log( 'on open_puzzle_box data : ', data );
-    io.emit('puzzle_box_opened', data);
+    socket.emit('puzzle_box_opened', data);
   });
   
   socket.on('disconnect', () => {
     console.log('user disconnected');
   })
 });
+
+let PORT = process.env.NODE_PORT || 8081;
+server.listen(PORT, 'localhost');
