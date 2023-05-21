@@ -9,6 +9,7 @@ const multer = require('multer');
 const { Server } = require("socket.io");
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
@@ -26,6 +27,7 @@ const sessionStore = new MySQLStore({
 }/* session store options */, pool.default);
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(session({
@@ -38,7 +40,20 @@ app.use(session({
 // websocket for puzzle update
 var server = require('http').Server(app);
 // http server를 socket.io server로 upgrade한다
-const io = new Server(server, {});
+const io = new Server(server, {
+  cors: {
+    origin: ["*"],
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "my-custom-header",
+        "Access-Control-Allow-Credentials": true,
+      });
+    },
+  },
+  allowEIO3: true // false by default
+});
 
 // entrance
 require('./entrance/init')(app, DCQuery);
