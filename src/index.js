@@ -6,8 +6,6 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const { Server } = require("socket.io");
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -38,9 +36,9 @@ app.use(session({
 }));
 
 // websocket for puzzle update
-var server = require('http').Server(app);
+var server = require('http').createServer(app);
 // http server를 socket.io server로 upgrade한다
-const io = new Server(server, {
+const io = require("socket.io")(server, {
   cors: {
     origin: ["*"],
     handlePreflightRequest: (req, res) => {
@@ -81,7 +79,7 @@ console.log( 'process.env.NODE_PORT : ', process.env.NODE_PORT );
 io.on('connection', function(socket) {
   socket.on('open_puzzle_box', function(data) {
     console.log( 'on open_puzzle_box data : ', data );
-    socket.emit('puzzle_box_opened', data);
+    io.emit('puzzle_box_opened', data);
   });
   
   socket.on('disconnect', () => {
