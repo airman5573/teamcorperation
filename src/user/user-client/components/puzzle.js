@@ -67,7 +67,9 @@ class Puzzle extends Component {
 
     // 이걸 굳이 state에 넣을 필요는 없지 ! View에 반영되는건 아니니께~
     this.socket = socketIOClient(this.props.endPoint);
+
     this.socket.on("puzzle_box_opened", data => {
+
       // 여기서 말하는 boxes는 lastBox를 제외한거야
       if ( this.boxes.length == this.props.count - 1 ) {
         var node = ReactDOM.findDOMNode(this.boxes[data.boxNumber-1]);
