@@ -7,7 +7,7 @@ const mysql = require("mysql");
 let config = {
   connectionLimit: 20,
   host: "localhost",
-  user: "node_discovery24_user",
+  user: "discovery_user",
   database: `discovery_${process.env.DCV}`,
 };
 let password = "root";
@@ -42,8 +42,8 @@ pool.query = util.promisify(pool.query);
 /* ------------------------------------------------------------------------- *
  *  Post Info Warehouse DB Connection
 /* ------------------------------------------------------------------------- */
-config.database = "warehouse";
-config.user = "node_discovery24_warehouse_user";
+config.database = "discovery_warehouse";
+config.user = "discovery_warehouse_user";
 config.password = "thoumas138";
 const warehouse_pool = mysql.createPool(config);
 // Ping database to check for common exception errors.
