@@ -53,8 +53,8 @@ class Upload extends Component {
       }
 
       // about 100MB
-      if ( file.size > 99428800 ) {
-        return alert("파일 사이즈는 100MB를 넘으면 안됩니다");
+      if ( file.size > 20428800 ) {
+        return alert("파일 사이즈는 200MB를 넘으면 안됩니다");
       }
 
       const type = file.type;
