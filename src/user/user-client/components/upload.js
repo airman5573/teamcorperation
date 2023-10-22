@@ -12,6 +12,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import * as loadImage from 'blueimp-load-image';
+import loadingGif from '../assets/loading.gif';
 
 // var consolere = toServerRe.connect('console.re','80','rpf5573');
 
@@ -52,8 +53,8 @@ class Upload extends Component {
       }
 
       // about 100MB
-      if ( file.size > 204288000 ) {
-        return alert("파일 사이즈는 200MB를 넘으면 안됩니다");
+      if ( file.size > 154288000 ) {
+        return alert("파일 사이즈는 150MB를 넘으면 안됩니다");
       }
 
       const type = file.type;
@@ -309,10 +310,10 @@ class Upload extends Component {
             <button className="ok" disabled={this.state.uploadDisabled} onClick={this.uploadWithCheckes}>
               <div class="before-loading">
                 <Done></Done>
-                <span>{this.state.uploadDisabled ? '로딩중' : '업로드'}</span>
+                <span>업로드</span>
               </div>
               <div class="is-loading">
-                <div class="loading">Loading&#8230;</div>
+                <img src={loadingGif} />
               </div>
             </button>
           </div>
