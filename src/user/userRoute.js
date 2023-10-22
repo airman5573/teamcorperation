@@ -20,7 +20,8 @@ module.exports = (app, DCQuery, upload) => {
         srcPath.js = 'user/main.js';
       }
       
-      const fullUrl =  req.protocol + '://' + req.get('host');
+      const fullUrl =  'https://' + req.get('host');
+
       try {
         let initialSettings = await DCQuery.getInitialState('user');
         initialSettings.rootPath = fullUrl;
