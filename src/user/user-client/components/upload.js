@@ -307,9 +307,12 @@ class Upload extends Component {
               <span>취소</span>
             </button>
             <button className="ok" disabled={this.state.uploadDisabled} onClick={this.uploadWithCheckes}>
-              <div>
+              <div class="before-loading">
                 <Done></Done>
                 <span>{this.state.uploadDisabled ? '로딩중' : '업로드'}</span>
+              </div>
+              <div class="is-loading">
+                <div class="loading">Loading&#8230;</div>
               </div>
             </button>
           </div>
