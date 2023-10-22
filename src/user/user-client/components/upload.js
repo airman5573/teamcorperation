@@ -307,8 +307,10 @@ class Upload extends Component {
               <span>취소</span>
             </button>
             <button className="ok" disabled={this.state.uploadDisabled} onClick={this.uploadWithCheckes}>
-              <Done></Done>
-              <span>업로드</span>
+              <div>
+                <Done></Done>
+                <span>{this.state.uploadDisabled ? '로딩중' : '업로드'}</span>
+              </div>
             </button>
           </div>
           { this.props.progressVal > 0 ? <LinearProgress className="progress-bar" variant="determinate" value={this.props.progressVal} /> : '' }
