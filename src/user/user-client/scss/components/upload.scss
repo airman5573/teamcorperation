@@ -72,6 +72,10 @@
         & > svg {
           font-size: 40px;
         }
+        &:disabled {
+          background-color: #aaaaaa;
+          border-radius: 8px;
+        }
       }
       .cancel {
         margin-right: 10px;
