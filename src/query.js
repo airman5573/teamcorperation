@@ -175,6 +175,9 @@ class Metas {
     sql = `UPDATE ${this.table} SET metaValue = 1 WHERE metaKey IN ('tempBoxState')`;
     result = await this.mysql.query(sql);
 
+    sql = `UPDATE ${this.table} SET metaValue = 1 WHERE metaKey IN ('eniacState')`;
+    result = await this.mysql.query(sql);
+
     sql = `UPDATE ${this.table} SET metaValue = NULL WHERE metaKey IN ('companyImage', 'map', 'originalEniacWords', 'eniacSuccessTeams', 'randomEniacWords', 'lastBoxUrl')`;
     result = await this.mysql.query(sql);
 
