@@ -124,13 +124,6 @@ class App extends Component {
       <div className="page">
         <div className="bg-img" style={{ backgroundImage: `url(${this.state.companyImageURL})` }}> </div>
         <div className="page-inner">
-          <div className="l-top">
-            <div className="text-container">
-              <ReactRevealText transitionTime={2000} show={this.state.show}>
-                DISCOVERY
-              </ReactRevealText>
-            </div>
-          </div>
           <div className="l-bottom">
             <form className="login-container" onSubmit={this.handleLoginSubmit}>
               <input className="form-control" placeholder="비밀번호" onChange={this.handlePasswordInput}></input>

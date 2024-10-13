@@ -37,11 +37,8 @@ html, body, #app, .page {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
 
-  .l-top {
-    margin-top: 20%;
-  }
   .l-bottom {
     margin-bottom: 5%;
     .login-container {

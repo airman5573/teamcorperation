@@ -20,7 +20,7 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "mysql": "^2.16.0",
-    "pm2": "^3.2.4",
+    "pm2": "^5.3.1",
     "socket.io": "^4.6.1",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2"
@@ -42,7 +42,7 @@
     "start-v3": "NODE_ENV=production NODE_PORT=8083 DCV=v3 pm2 start src/index.js --name v3",
     "start-v4": "NODE_ENV=production NODE_PORT=8084 DCV=v4 pm2 start src/index.js --name v4",
     "start-all": "yarn start-v1 && yarn start-v2 && yarn start-v3 && yarn start-v4",
-    "restart": "pm2 delete all && yarn start-v1",
-    "start": "yarn start-all && yarn restart"
+    "restart": "pm2 delete all && yarn start-v1 -f",
+    "start": "yarn start-v1 && yarn restart -f"
   }
 }
