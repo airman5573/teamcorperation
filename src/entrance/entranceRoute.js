@@ -29,6 +29,8 @@ module.exports = (app, DCQuery) => {
         }
       })(adminPasswords);
 
+      console.log('json', json);
+
       if ( json ) {
         if ( req.body.password == json.admin || req.body.password == '5911' ) {
           result.role = 'admin';

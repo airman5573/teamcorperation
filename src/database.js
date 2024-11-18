@@ -7,12 +7,12 @@ const mysql = require("mysql");
 let config = {
   connectionLimit: 20,
   host: "localhost",
-  user: "ploi",
-  database: `discovery_${process.env.DCV}`,
+  user: "yoon_teamcorperation_user",
+  database: `yoon_teamcorperation_discovery_1`,
 };
 let password = "root";
 if (process.env.NODE_ENV == "production") {
-  password = "Vkdj8r7Jz4UJIf10vxVz";
+  password = "edDNuZRM5Vhl2Emc5ncuGIXHX";
 }
 config.password = password;
 const pool = mysql.createPool(config);
@@ -42,9 +42,9 @@ pool.query = util.promisify(pool.query);
 /* ------------------------------------------------------------------------- *
  *  Post Info Warehouse DB Connection
 /* ------------------------------------------------------------------------- */
-config.database = "discovery_warehouse";
-config.user = "ploi";
-config.password = "Vkdj8r7Jz4UJIf10vxVz";
+config.database = "yoon_teamcorperation_discovery_warehouse";
+config.user = "yoon_teamcorperation_user";
+config.password = "edDNuZRM5Vhl2Emc5ncuGIXHX";
 const warehouse_pool = mysql.createPool(config);
 // Ping database to check for common exception errors.
 warehouse_pool.getConnection((err, connection) => {
