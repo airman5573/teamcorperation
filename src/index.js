@@ -25,15 +25,30 @@ const sessionStore = new MySQLStore({
 }/* session store options */, pool.default);
 
 const app = express();
+
+// app.use(cors({
+//   origin: 'https://teamcorperation.kr', 
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+//   exposedHeaders: ['set-cookie']
+// }));
+
 app.use(cors());
-app.use(bodyParser.json());
-app.use(morgan('combined', { stream: accessLogStream }));
+
+// (1) 프록시 신뢰 설정
+// app.set('trust proxy', 1);
+
+// (2) 세션 미들웨어
 app.use(session({
-  secret: 'z',
+  secret: 'asol_teamcorperation_scret_key',
   resave: false,
   saveUninitialized: true,
   store: sessionStore
 }));
+
+app.use(bodyParser.json());
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // websocket for puzzle update
 var server = require('http').createServer(app);

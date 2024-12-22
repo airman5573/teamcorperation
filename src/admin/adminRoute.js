@@ -15,8 +15,6 @@ module.exports = (app, DCQuery, upload) => {
       srcPath.js = 'admin/main.js';
     }
 
-    console.log('req.session', req.session);
-
     // 먼저 관리자로 로그인이 되어있는지 부터 확인해야지
     if ( req.session.loginData && req.session.loginData.role == 'admin' ) {
       let initialSettings = await DCQuery.getInitialState('admin');

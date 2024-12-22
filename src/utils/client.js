@@ -78,26 +78,29 @@ function getRandomInteger(min, max) {
 }
 
 async function simpleAxios(axios, config) {
-  return new Promise(async function(resolve, reject) {
-    try {
-      let response = await axios(config);
-      if ( response.status == 201 ) {
-        if (response.data.error) {
-          alert(response.data.error);
-          reject(response.data.error);
-        }
-        resolve(response);
-      } else {
-        alert(constants.ERROR.unknown);
-        console.errir( constants.ERROR.unknown );
-        reject( constants.ERROR.unknown );
-      }
-    } catch(e) {
-      console.error(e);
-      reject(e);
+  axios.defaults.withCredentials = true;
+  
+  try {
+    const response = await axios(config);
+    
+    if (response.status !== 201) {
+      throw new Error(constants.ERROR.unknown);
     }
-  });
+
+    if (response.data.error) {
+      throw new Error(response.data.error);
+    }
+
+    return response;
+    
+  } catch (error) {
+    const errorMessage = error.message || constants.ERROR.unknown;
+    alert(errorMessage);
+    console.error(error);
+    throw error;
+  }
 }
+
 
 function boxNumberToLocation(number, maxLocation) {
   // 일단

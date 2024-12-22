@@ -31,44 +31,78 @@ module.exports = (app, DCQuery) => {
 
       console.log('json', json);
 
-      if ( json ) {
-        if ( req.body.password == json.admin || req.body.password == '5911' ) {
+      if (json) {
+        if (req.body.password == json.admin || req.body.password == '5911') {
           result.role = 'admin';
           result.success = true;
-
           req.session.loginData = result;
-          return res.status(201).json(result);
         }
-        else if ( req.body.password == json.assist ) {
+        else if (req.body.password == json.assist) {
           result.role = 'assist';
           result.success = true;
-
           req.session.loginData = result;
-          return res.status(201).json(result);
+        }
+        
+        if (result.success) {
+          return new Promise((resolve, reject) => {
+            req.session.save((err) => {
+              if (err) {
+                console.error('Session save error:', err);
+                reject(err);
+              }
+              console.log('Session after login:', req.session);
+              resolve();
+            });
+          })
+          .then(() => {
+            res.status(201).json(result);
+          })
+          .catch(() => {
+            res.sendStatus(500);
+          });
         }
       }
 
       let pw = parseInt(req.body.password);
-      if ( ! isNaN(pw) && pw > 0 ) {
+      if (!isNaN(pw) && pw > 0) {
         let teamPasswords = await DCQuery.teamPasswords.getAll();
-        for ( var i = 0; i < teamPasswords.length; i++ ) {
-          if ( pw == teamPasswords[i].password ) {
-            result.role = 'user',
-            result.success = true,
+        for (var i = 0; i < teamPasswords.length; i++) {
+          if (pw == teamPasswords[i].password) {
+            result.role = 'user';
+            result.success = true;
             result.team = teamPasswords[i].team;
-
             req.session.loginData = result;
-            return res.status(201).json(result);
+            
+            return new Promise((resolve, reject) => {
+              req.session.save((err) => {
+                if (err) {
+                  console.error('Session save error:', err);
+                  reject(err);
+                }
+                console.log('Session after login:', req.session);
+                resolve();
+              });
+            })
+            .then(() => {
+              res.status(201).json(result);
+            })
+            .catch(() => {
+              res.sendStatus(500);
+            });
           }
         }
       }
+
+      // If no matching password found
+      return res.status(201).json({
+        error: '비밀번호를 다시 확인해 주세요'
+      });
+
     } catch (err) {
-      console.error( 'err : ', err );
+      console.error('err : ', err);
       return res.sendStatus(401);
     }
+});
 
-    return res.status(201).json({
-      error: '비밀번호를 다시 확인해 주세요'
-    });
-  });
+
 }
