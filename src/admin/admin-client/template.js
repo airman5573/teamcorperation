@@ -6,7 +6,7 @@ module.exports = function (initialState = {}, srcPath = { style: 'style.css', js
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-                <title> 팀레이스 </title>
+                <title> 팀코퍼레이션 </title>
                 <link href="${srcPath.style}" rel="stylesheet">
               </head>
               <body>
