@@ -10,6 +10,7 @@ import MappingPointModal from './mapping-point-modal';
 import ResultModal from './result-modal';
 import ResetModal from './reset-modal';
 import PostInfoModal from './post-info-modal';
+import NavigationVisibilityModal from './navigation-visibility-modal';
 
 class Modals extends Component {
   state = {  }
@@ -25,6 +26,7 @@ class Modals extends Component {
         <AdminPasswordModal className="modal--admin-passwords"></AdminPasswordModal>
         <MappingPointModal className="modal--mapping-points"></MappingPointModal>
         <PostInfoModal className="modal--post-infos"></PostInfoModal>
+        <NavigationVisibilityModal className="modal--navigation-visibility"></NavigationVisibilityModal>
         <ResultModal className="modal--result"></ResultModal>
         <ResetModal className="modal--reset"></ResetModal>
       </div>

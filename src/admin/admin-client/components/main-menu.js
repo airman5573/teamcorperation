@@ -19,6 +19,7 @@ export default class MainMenu extends Component {
       {label: "최종결과", className: "result"},
       {label: "점수배정표", className: "mapping-points"},
       {label: "포스트 정보", className: "post-infos"},
+      {label: "네비게이션 설정", className: "navigation-visibility"},
       {label: "관리자 비밀번호", className: "admin-passwords"},
       {label: "초기화", className: "reset"},
     ];

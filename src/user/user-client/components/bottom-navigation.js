@@ -20,6 +20,9 @@ class BottomNavigation extends Component {
       ripple__circle: true
     });
 
+    const showPointNav = this.props.showPointNav !== '0';
+    const showPuzzleNav = this.props.showPuzzleNav !== '0';
+
     return (
       <div className="bottom-navigation">
         <NavLink to="/user/page/map">
@@ -27,16 +30,23 @@ class BottomNavigation extends Component {
           <div className="text">지도</div>
           <div className={rippleCN}></div>
         </NavLink>
-        <NavLink to="/user/page/point">
-          <div className="icon"><ChartIcon /></div>
-          <div className="text">포인트</div>
-          <div className={rippleCN}></div>
-        </NavLink>
-        <NavLink to="/user/page/puzzle">
-          <div className="icon"><PuzzleIcon /></div>
-          <div className="text">구역</div>
-          <div className={rippleCN}></div>
-        </NavLink>
+        
+        {showPointNav && (
+          <NavLink to="/user/page/point">
+            <div className="icon"><ChartIcon /></div>
+            <div className="text">포인트</div>
+            <div className={rippleCN}></div>
+          </NavLink>
+        )}
+        
+        {showPuzzleNav && (
+          <NavLink to="/user/page/puzzle">
+            <div className="icon"><PuzzleIcon /></div>
+            <div className="text">구역</div>
+            <div className={rippleCN}></div>
+          </NavLink>
+        )}
+        
         <NavLink to="/user/page/upload">
           <div className="icon"><UploadIcon /></div>
           <div className="text">업로드</div>

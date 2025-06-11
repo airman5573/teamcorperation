@@ -311,6 +311,19 @@ module.exports = (app, DCQuery, upload) => {
     return res.sendStatus(201);
   });
 
+  // navigation visibility
+  app.post('/admin/navigation-visibility', async (req, res) => {
+    try {
+      const value = req.body.isVisible ? '1' : '0';
+      await DCQuery.metas.update('showPointNav', value);
+      await DCQuery.metas.update('showPuzzleNav', value);
+      return res.sendStatus(201);
+    } catch (e) {
+      console.log('error : ', e);
+      return res.sendStatus(404);
+    }
+  });
+
   // load files
   app.post('/admin/load-upload-infos', async (req, res) => {
     try {
