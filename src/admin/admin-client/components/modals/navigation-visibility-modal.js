@@ -6,25 +6,32 @@ import { Button, Modal, ModalHeader, ModalBody, Row, Col } from 'reactstrap';
 import { closeModal, updateNavigationVisibility } from '../../actions';
 import axios from 'axios';
 
+const ICON_MODE = {
+  THREE: '3_ICONS',
+  FIVE: '5_ICONS'
+};
+
 class NavigationVisibilityModal extends React.Component {
   constructor(props) {
     super(props);
+    const isFiveIcons = (this.props.showPointNav !== '0') && (this.props.showPuzzleNav !== '0');
+    
     this.state = {
       backdrop: true,
-      isVisible: (this.props.showPointNav !== '0') && (this.props.showPuzzleNav !== '0')
+      iconMode: isFiveIcons ? ICON_MODE.FIVE : ICON_MODE.THREE
     }
 
     this.close = this.close.bind(this);
-    this.updateNavigationVisibility = this.updateNavigationVisibility.bind(this);
+    this.handleIconModeChange = this.handleIconModeChange.bind(this);
   }
 
   close() {
     this.props.closeModal();
   }
 
-  async updateNavigationVisibility(e) {
-    let val = parseInt(e.currentTarget.value);
-    let isVisible = val === constants.ON;
+  async handleIconModeChange(e) {
+    const newMode = e.currentTarget.value;
+    const isVisible = newMode === ICON_MODE.FIVE;
 
     const config = {
       method: 'POST',
@@ -35,7 +42,7 @@ class NavigationVisibilityModal extends React.Component {
     };
     
     utils.simpleAxios(axios, config).then(() => {
-      this.setState({ isVisible });
+      this.setState({ iconMode: newMode });
       this.props.updateNavigationVisibility(isVisible);
       alert("성공");
     }).catch(error => {
@@ -49,33 +56,35 @@ class NavigationVisibilityModal extends React.Component {
       <Modal isOpen={ (this.props.activeModalClassName == this.props.className) ? true : false } toggle={this.close} className={this.props.className}>
         <ModalHeader toggle={this.close}>
           <div className="l-left">
-            <label>네비게이션 설정</label>
+            <label>아이콘 설정</label>
           </div>
         </ModalHeader>
         <ModalBody>
           <Row>
             <Col xs="12">
               <div className="navigation-visibility d-flex align-items-center">
-                <label className="mr-3">포인트/구역 메뉴 표시 : </label>
+                <label className="mr-3">아이콘 개수 : </label>
                 <div className="radio abc-radio abc-radio-primary mr-3 d-flex align-items-center">
                   <input 
                     type="radio" 
-                    id="navigationVisibilityRadioInput01" 
-                    onChange={this.updateNavigationVisibility} 
-                    checked={this.state.isVisible} 
-                    value={constants.ON}
+                    id="iconModeRadio3" 
+                    name="iconMode"
+                    onChange={this.handleIconModeChange} 
+                    checked={this.state.iconMode === ICON_MODE.THREE} 
+                    value={ICON_MODE.THREE}
                   />
-                  <label htmlFor="navigationVisibilityRadioInput01">ON</label>
+                  <label htmlFor="iconModeRadio3">3개아이콘</label>
                 </div>
-                <div className="radio abc-radio abc-radio-danger d-flex align-items-center">
+                <div className="radio abc-radio abc-radio-primary d-flex align-items-center">
                   <input 
                     type="radio" 
-                    id="navigationVisibilityRadioInput02" 
-                    onChange={this.updateNavigationVisibility} 
-                    checked={!this.state.isVisible} 
-                    value={constants.OFF}
+                    id="iconModeRadio5"
+                    name="iconMode"
+                    onChange={this.handleIconModeChange} 
+                    checked={this.state.iconMode === ICON_MODE.FIVE} 
+                    value={ICON_MODE.FIVE}
                   />
-                  <label htmlFor="navigationVisibilityRadioInput02">OFF</label>
+                  <label htmlFor="iconModeRadio5">5개아이콘</label>
                 </div>
               </div>
             </Col>
