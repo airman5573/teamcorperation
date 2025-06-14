@@ -17,7 +17,7 @@ const MySQLStore = require('express-mysql-session');
 // mysql
 const pool = require('./database');
 const DCQuery = new (require('./query'))(pool.default);
-const WHQuery = new (require('./wh-query'))(pool.warehouse);
+const WHQuery = new (require('./wh-query'))(pool.default);
 const sessionStore = new MySQLStore({
   schema: {
     tableName: 'dc_sessions'
