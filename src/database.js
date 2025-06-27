@@ -6,11 +6,11 @@ const mysql = require("mysql");
 /* ------------------------------------------------------------------------- */
 let config = {
   connectionLimit: 20,
-  host: "localhost",
+  host: "127.0.0.1",
   user: "teamcorperation_db_user",
   database: `teamcorperation_main`,
 };
-let password = "root";
+let password = "Thoumas138!";
 if (process.env.NODE_ENV == "production") {
   password = "Thoumas138!";
 }
