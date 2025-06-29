@@ -208,7 +208,7 @@ module.exports = (app, DCQuery, upload) => {
             } else {
               await DCQuery.points.update({
                 team,
-                useable: point, // useable이 아니라 temp를 업데이트 한다,
+                useable: point, // temp가 아니라 useable을 업데이트 한다,
               });
               await DCQuery.uploads.add(team, filename, currentTime, false);
             }

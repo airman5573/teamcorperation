@@ -3,9 +3,9 @@ const fileExtensions = require('./file-extensions');
 
 function getCurrentTimeInSeconds() {
   let date = new Date();
-  let h = date.getHours();
-  let m = date.getMinutes();
-  let s = date.getSeconds();
+  let h = Number(date.getHours());
+  let m = Number(date.getMinutes());
+  let s = Number(date.getSeconds());
   return(h*60*60 + m*60 + s);
 }
 

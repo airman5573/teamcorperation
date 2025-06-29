@@ -11,7 +11,8 @@ class TimerModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backdrop: true
+      backdrop: true,
+      currentTime: utils.getCurrentTimeInSeconds()
     }
 
     this.close = this.close.bind(this);
@@ -20,6 +21,26 @@ class TimerModal extends React.Component {
     this.allTimerStart = this.allTimerStart.bind(this);
     this.updateEniacState = this.updateEniacState.bind(this);
     this.updateTempBoxState = this.updateTempBoxState.bind(this);
+    this.updateRestTimes = this.updateRestTimes.bind(this);
+    
+    this.realTimeInterval = null;
+  }
+
+  componentDidMount() {
+    // 1초마다 실시간으로 남은시간 업데이트
+    this.realTimeInterval = setInterval(this.updateRestTimes, 1000);
+  }
+
+  componentWillUnmount() {
+    // 컴포넌트 언마운트 시 interval 정리
+    if (this.realTimeInterval) {
+      clearInterval(this.realTimeInterval);
+    }
+  }
+
+  updateRestTimes() {
+    const currentTime = utils.getCurrentTimeInSeconds();
+    this.setState({ currentTime });
   }
 
   close() {
@@ -138,7 +159,6 @@ class TimerModal extends React.Component {
   }
 
   renderTimerManageBtns(count) {
-    let currentTime = utils.getCurrentTimeInSeconds();
     var btnList = [];
     for ( var i = 1; i <= count; i++ ) {
       let teamTimer = this.props.teamTimers[i-1] // 이게 1팀부터 15팀까지 순서대로 정리되어있으니까,,,그냥 이렇게 찾아도 문제없음
@@ -149,7 +169,7 @@ class TimerModal extends React.Component {
       let text = teamTimer.state ? constants.STOP : constants.WAIT;
       var restTime = teamTimer.restTime;
       if ( teamTimer.state ) {
-        restTime = this.props.laptime - (currentTime - teamTimer.startTime);
+        restTime = this.props.laptime - (this.state.currentTime - teamTimer.startTime);
       }
       let restTimeCN = cn({
         restTime: true,

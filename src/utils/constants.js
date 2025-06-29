@@ -13,8 +13,23 @@ const teamColors = [
   '#607D8B', // 12
   '#795548', // 13
   '#9E9E9E', // 14
-  '#00BCD4'  // 15
-]; // 이제 안쓴다 이거는...
+  '#00BCD4', // 15
+  '#FF5722', // 16
+  '#3F51B5', // 17
+  '#009688', // 18
+  '#FFC107', // 19
+  '#E91E63', // 20
+  '#8BC34A', // 21
+  '#FF9800', // 22
+  '#673AB7', // 23
+  '#4CAF50', // 24
+  '#2196F3', // 25
+  '#FFEB3B', // 26
+  '#9C27B0', // 27
+  '#FF6D00', // 28
+  '#1976D2', // 29
+  '#388E3C'  // 30
+]; // 30개 팀 지원으로 확장
 const OFF = 0;
 const ON = 1;
 const START = '시작';
@@ -24,7 +39,7 @@ const IMAGE = 'image';
 const VIDEO = 'video';
 const EMPTY = 'empty';
 const WORD = 'word';
-const UPLOAD_TIME_INTERVAL = 180;
+const UPLOAD_TIME_INTERVAL = 300;
 const ERROR = {
   unknown: 'ERROR : 알수없는 에러가 발생했습니다'
 }
