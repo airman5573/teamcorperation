@@ -164,17 +164,12 @@ class Upload extends Component {
       }
     }
     disableBtn();
-    if ( this.props.tempBoxState ) {
-      this.timerCheck(() => {
-        this.intervalCheck(() => {
-          this.uploadFile(enableBtn, enableBtn);
-        }, enableBtn)
-      }, enableBtn);
-    } else {
+    // tempBoxState와 관계없이 항상 타이머 체크를 먼저 수행
+    this.timerCheck(() => {
       this.intervalCheck(() => {
         this.uploadFile(enableBtn, enableBtn);
-      }, enableBtn);
-    }
+      }, enableBtn)
+    }, enableBtn);
   }
 
   async cancelPreview(e) {
