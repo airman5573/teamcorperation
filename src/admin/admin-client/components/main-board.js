@@ -133,7 +133,7 @@ class MainBoard extends Component {
           미션정보창고
         </a>
         <button type="button" className="btn btn-outline-danger load-files-btn" onClick={this.loadUploadInfos}>
-          업로드자료
+          업로드자료 불러오기
         </button>
         <a href="/media-files" target="_blank" className="btn btn-outline-success open-media-files-page">
           업로드자료모음
