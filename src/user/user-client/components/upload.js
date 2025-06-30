@@ -278,13 +278,13 @@ class Upload extends Component {
               <h4>주의</h4>
               <ol>
                 <li>
-                  동영상 촬영시 화질을 <span className="blue">최저</span>로 낮춰주세요.
+                  동영상 촬영시 화질을<br/><span className="blue">최저</span>로 낮춰주세요.
                 </li>
                 <li>
-                  동영상은 1분 이내로 찍어주시기 바랍니다
+                  동영상은 1분 이내로</br>찍어주시기 바랍니다
                 </li>
                 <li>
-                  영상 용량이 커서 올라가지 않는 경우에는, 팀번호와 함께 <a href="https://open.kakao.com/o/stWC5AEh" onClick={(e) => e.stopPropagation()}>카카오톡 오픈채팅방</a> 으로 보내주세요.
+                  영상 용량이 커서 올라가지 않는 경우에는, <br/> 팀번호와 함께 <a href="https://open.kakao.com/o/stWC5AEh" onClick={(e) => e.stopPropagation()}>카카오톡 오픈채팅방</a> 으로 보내주세요.
                 </li>
               </ol>
             </div>
