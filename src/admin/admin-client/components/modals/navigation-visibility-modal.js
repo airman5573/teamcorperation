@@ -14,6 +14,7 @@ const ICON_MODE = {
 class NavigationVisibilityModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props', this.props);
     const isFiveIcons = this.props.showPointNav && this.props.showPuzzleNav;
     
     this.state = {
@@ -95,6 +96,12 @@ class NavigationVisibilityModal extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('Redux state values:', {
+    showPointNav: state.showPointNav,
+    showPuzzleNav: state.showPuzzleNav,
+    types: [typeof state.showPointNav, typeof state.showPuzzleNav]
+  });
+  
   return {
     activeModalClassName : state.modalControl.activeModalClassName,
     showPointNav: state.showPointNav !== '0',
