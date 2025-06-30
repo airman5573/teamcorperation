@@ -7,4 +7,3 @@ export * from './puzzle-setting-actions';
 export * from './admin-password-actions';
 export * from './mapping-point-actions';
 export * from './post-info-actions';
-export * from './navigation-visibility-actions';
