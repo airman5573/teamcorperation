@@ -14,12 +14,20 @@ const ICON_MODE = {
 class NavigationVisibilityModal extends React.Component {
   constructor(props) {
     super(props);
-    const isFiveIcons = (this.props.showPointNav !== '0') && (this.props.showPuzzleNav !== '0');
+    console.log('NavigationVisibilityModal props:', {
+      showPointNav: this.props.showPointNav,
+      showPuzzleNav: this.props.showPuzzleNav
+    });
+    
+    const isFiveIcons = (this.props.showPointNav !== false) && (this.props.showPuzzleNav !== false);
+    console.log('isFiveIcons calculation:', isFiveIcons);
     
     this.state = {
       backdrop: true,
       iconMode: isFiveIcons ? ICON_MODE.FIVE : ICON_MODE.THREE
     }
+    
+    console.log('Initial iconMode state:', this.state.iconMode);
 
     this.close = this.close.bind(this);
     this.handleIconModeChange = this.handleIconModeChange.bind(this);
