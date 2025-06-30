@@ -19,7 +19,7 @@ module.exports = (app, path, multer, DCQuery) => {
   });
   const upload = multer({
     storage: storage,
-    limits:{fileSize: 100000000} // about 100MB
+    limits:{fileSize: 157286400} // about 150MB
   }).fields([{name: 'userFile', maxCount: 1}]);
   require('./userRoute')(app, DCQuery, upload);
 }
