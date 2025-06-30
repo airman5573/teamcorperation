@@ -283,6 +283,9 @@ class Upload extends Component {
                 <li>
                   동영상은 1분 이내로 찍어주시기 바랍니다
                 </li>
+                <li>
+                  영상 용량이 커서 올라가지 않는 경우에는, <a href="https://open.kakao.com/o/stWC5AEh">카카오톡 오픈채팅방</a> 으로 보내주세요.
+                </li>
               </ol>
             </div>
           </div>
