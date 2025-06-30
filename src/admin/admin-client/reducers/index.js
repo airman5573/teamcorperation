@@ -7,6 +7,7 @@ import puzzleSettingReducer from './puzzle-setting-reducer';
 import adminPasswordReducer from './admin-password-reducer';
 import mappingPointsReducer from './mapping-points-reducer';
 import postInfoReducer from './post-info-reducer';
+import { showPointNavReducer, showPuzzleNavReducer } from './show-nav-reducer';
 
 export default combineReducers({
   teamSettings: teamSettingReducer,
@@ -16,5 +17,7 @@ export default combineReducers({
   puzzleSettings: puzzleSettingReducer,
   adminPasswords: adminPasswordReducer,
   mappingPoints: mappingPointsReducer,
-  postInfos: postInfoReducer
+  postInfos: postInfoReducer,
+  showPointNav: showPointNavReducer,
+  showPuzzleNav: showPuzzleNavReducer
 });
