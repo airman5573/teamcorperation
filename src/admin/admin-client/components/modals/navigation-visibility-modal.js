@@ -19,7 +19,7 @@ class NavigationVisibilityModal extends React.Component {
       showPuzzleNav: this.props.showPuzzleNav
     });
     
-    const isFiveIcons = (this.props.showPointNav !== false) && (this.props.showPuzzleNav !== false);
+    const isFiveIcons = this.props.showPointNav && this.props.showPuzzleNav;
     console.log('isFiveIcons calculation:', isFiveIcons);
     
     this.state = {
