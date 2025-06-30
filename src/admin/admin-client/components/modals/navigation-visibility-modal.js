@@ -3,7 +3,7 @@ import * as constants from '../../../../utils/constants';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, Row, Col } from 'reactstrap';
-import { closeModal, updateNavigationVisibility } from '../../actions';
+import { closeModal } from '../../actions';
 import axios from 'axios';
 
 const ICON_MODE = {
@@ -14,20 +14,12 @@ const ICON_MODE = {
 class NavigationVisibilityModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log('NavigationVisibilityModal props:', {
-      showPointNav: this.props.showPointNav,
-      showPuzzleNav: this.props.showPuzzleNav
-    });
-    
     const isFiveIcons = this.props.showPointNav && this.props.showPuzzleNav;
-    console.log('isFiveIcons calculation:', isFiveIcons);
     
     this.state = {
       backdrop: true,
       iconMode: isFiveIcons ? ICON_MODE.FIVE : ICON_MODE.THREE
     }
-    
-    console.log('Initial iconMode state:', this.state.iconMode);
 
     this.close = this.close.bind(this);
     this.handleIconModeChange = this.handleIconModeChange.bind(this);
@@ -51,7 +43,6 @@ class NavigationVisibilityModal extends React.Component {
     
     utils.simpleAxios(axios, config).then(() => {
       this.setState({ iconMode: newMode });
-      this.props.updateNavigationVisibility(isVisible);
       alert("성공");
     }).catch(error => {
       console.error('Navigation visibility update failed:', error);
@@ -107,9 +98,8 @@ function mapStateToProps(state, ownProps) {
   return {
     activeModalClassName : state.modalControl.activeModalClassName,
     showPointNav: state.showPointNav !== '0',
-    showPuzzleNav: state.showPuzzleNav !== '0',
-    isNavigationVisible: state.navigationVisibility.isNavigationVisible
+    showPuzzleNav: state.showPuzzleNav !== '0'
   };
 }
 
-export default connect(mapStateToProps, { closeModal, updateNavigationVisibility })(NavigationVisibilityModal);
+export default connect(mapStateToProps, { closeModal })(NavigationVisibilityModal);

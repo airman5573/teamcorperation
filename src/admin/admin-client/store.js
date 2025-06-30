@@ -43,9 +43,6 @@ export default function configureStore(initialSettings) {
     adminPasswords: JSON.parse(initialSettings.adminPasswords),
     mappingPoints: JSON.parse(initialSettings.mappingPoints),
     postInfos: initialSettings.postInfos,
-    navigationVisibility: {
-      isNavigationVisible: (initialSettings.showPointNav !== '0' && initialSettings.showPuzzleNav !== '0')
-    },
     showPointNav: initialSettings.showPointNav,
     showPuzzleNav: initialSettings.showPuzzleNav
   };
