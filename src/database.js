@@ -1,20 +1,17 @@
 const util = require("util");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 /* ------------------------------------------------------------------------- *
  *  Default DB Connection
 /* ------------------------------------------------------------------------- */
 let config = {
-  connectionLimit: 20,
-  host: "127.0.0.1",
-  user: "teamcorperation_db_user",
-  database: `teamcorperation_main`,
+  connectionLimit: Number(process.env.DB_CONNECTION_LIMIT || 20),
+  host: process.env.DB_HOST || "127.0.0.1",
+  user: process.env.DB_USER || "teamcorperation_db_user",
+  database: process.env.DB_NAME || "teamcorperation_main",
+  password: process.env.DB_PASSWORD || "Thoumas138!",
+  port: Number(process.env.DB_PORT || 3306),
 };
-let password = "Thoumas138!";
-if (process.env.NODE_ENV == "production") {
-  password = "Thoumas138!";
-}
-config.password = password;
 const pool = mysql.createPool(config);
 
 // Ping database to check for common exception errors.

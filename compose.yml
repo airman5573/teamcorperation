@@ -1,0 +1,57 @@
+name: teamcoperation-v1
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NODE_PORT: 8081
+      NODE_HOST: 0.0.0.0
+      DCV: v1
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: teamcorperation_main
+      DB_USER: teamcorperation_db_user
+      DB_PASSWORD: "Thoumas138!"
+    volumes:
+      - admin_uploads:/app/public/admin/uploads
+      - user_uploads:/app/public/user/uploads
+    depends_on:
+      - db
+    networks:
+      - proxy
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.teamcoperation-v1.rule=Host(`teamcoperation-v1.asol.ai.kr`)"
+      - "traefik.http.routers.teamcoperation-v1.entrypoints=websecure"
+      - "traefik.http.routers.teamcoperation-v1.tls=true"
+      - "traefik.http.routers.teamcoperation-v1.tls.certresolver=letsencrypt"
+      - "traefik.http.services.teamcoperation-v1.loadbalancer.server.port=8081"
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: teamcorperation_main
+      MYSQL_USER: teamcorperation_db_user
+      MYSQL_PASSWORD: "Thoumas138!"
+      MYSQL_ROOT_PASSWORD: "Thoumas138!"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - default
+
+volumes:
+  mysql_data:
+  admin_uploads:
+  user_uploads:
+
+networks:
+  proxy:
+    external: true
+    name: proxy

@@ -103,4 +103,5 @@ io.on('connection', function(socket) {
 });
 
 let PORT = process.env.NODE_PORT || 8081;
-server.listen(PORT, 'localhost');
+let HOST = process.env.NODE_HOST || (process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost');
+server.listen(PORT, HOST);
